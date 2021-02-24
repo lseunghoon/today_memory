@@ -42,7 +42,7 @@ class HomePage extends GetView<AppController> {
                   return Container(
                     child: InkWell(
                       onTap: () {
-                        Get.toNamed('/add');
+                        Get.toNamed('/add', arguments: index);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
