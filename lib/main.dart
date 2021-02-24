@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
+        fontFamily: 'NanumMyeongjo',
         cursorColor: Colors.black,
       ),
       initialRoute: '/',
