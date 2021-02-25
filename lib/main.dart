@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 import 'package:todays_memory/src/screen/add_memory.dart';
 import 'package:todays_memory/src/screen/home_page.dart';
+import 'package:todays_memory/src/screen/memory_list.dart';
+
+AppController controller = AppController();
 
 void main() {
   runApp(MyApp());
@@ -24,6 +27,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => HomePage()),
         GetPage(name: '/add', page: () => AddMemoryPage()),
+        GetPage(name: '/list', page: () => MemoryListPage()),
       ],
     );
   }

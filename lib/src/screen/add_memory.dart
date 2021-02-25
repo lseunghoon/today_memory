@@ -11,6 +11,19 @@ class AddMemoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.grey[50],
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_outlined,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+        ),
         bottomNavigationBar: BottomAppBar(
           child: Container(
             padding: EdgeInsets.only(
@@ -53,6 +66,23 @@ class AddMemoryPage extends StatelessWidget {
                 Text(
                   dayFormat.format(DateTime.now()),
                   style: TextStyle(color: Colors.black),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    isDense: true,
+                    border: InputBorder.none,
+                    hintText: '오늘의 기억 한줄 요약',
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 1,
+                    color: Colors.black45,
+                  ),
                 ),
                 Expanded(
                   child: SingleChildScrollView(
