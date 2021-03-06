@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "829634420846",
+    "project_id": "todays-memory",
+    "storage_bucket": "todays-memory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829634420846:android:b0bdb3bc8197846f94067f",
+        "android_client_info": {
+          "package_name": "com.example.todays_memory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829634420846-vrf0s19a8jgt2jmv93ae9b0kaejt3hi2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkgX9pCqDFwnhnTQuqQYAbf55nJn7Ew1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829634420846-vrf0s19a8jgt2jmv93ae9b0kaejt3hi2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

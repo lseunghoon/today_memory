@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
@@ -7,7 +8,9 @@ import 'package:todays_memory/src/screen/memory_list.dart';
 
 AppController controller = AppController();
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
