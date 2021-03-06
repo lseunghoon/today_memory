@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
+        accentColor: Colors.transparent, //드래그 시 컬러 투명하게.
         fontFamily: 'NanumMyeongjo',
         cursorColor: Colors.black,
       ),
@@ -26,8 +27,18 @@ class MyApp extends StatelessWidget {
       }),
       getPages: [
         GetPage(name: '/', page: () => HomePage()),
-        GetPage(name: '/add', page: () => AddMemoryPage()),
-        GetPage(name: '/list', page: () => MemoryListPage()),
+        GetPage(
+          name: '/add',
+          page: () => AddMemoryPage(),
+          transition: Transition.leftToRightWithFade,
+          transitionDuration: Duration(milliseconds: 500),
+        ),
+        GetPage(
+          name: '/list',
+          page: () => MemoryListPage(),
+          transition: Transition.leftToRightWithFade,
+          transitionDuration: Duration(milliseconds: 500),
+        ),
       ],
     );
   }

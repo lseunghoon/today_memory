@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
 
-class AddMemoryPage extends StatelessWidget {
+class AddMemoryPage extends StatefulWidget {
+  @override
+  _AddMemoryPageState createState() => _AddMemoryPageState();
+}
+
+class _AddMemoryPageState extends State<AddMemoryPage> {
   AppController controller = AppController();
+
   DateFormat dateFormat = DateFormat('yyyy년 MM월 dd일');
+
   DateFormat dayFormat = DateFormat('E');
+
+  PickedFile _image;
+
+  Future getImage() async {
+    PickedFile image =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +54,9 @@ class AddMemoryPage extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.image),
-                  onPressed: () {},
+                  onPressed: () {
+                    getImage();
+                  },
                 ),
                 IconButton(
                   icon: Icon(Icons.check),
