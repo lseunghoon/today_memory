@@ -20,6 +20,8 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
 
   DateFormat dayFormat = DateFormat('E');
 
+  final imgIndex = Get.arguments;
+
   final f = FirebaseFirestore.instance;
 
   @override
@@ -53,8 +55,12 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
                 IconButton(
                   icon: Icon(Icons.check),
                   onPressed: () {
-                    addText();
-                    Get.back();
+                    if (controller.oneTextEditingController.text == '') {
+                      Get.snackbar('잠시만요 저기요', '오늘의 한줄을 써주세요!');
+                    } else {
+                      addText();
+                      Get.toNamed('/list', arguments: imgIndex);
+                    }
                   },
                 ),
               ],
@@ -67,7 +73,7 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
             child: Column(
               children: [
                 Image.asset(
-                  controller.imgUrl[Get.arguments],
+                  controller.imgUrl[imgIndex],
                   width: 50,
                 ),
                 SizedBox(
@@ -128,7 +134,7 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
     f.collection('data').add({
       'one_sentence': '${controller.oneTextEditingController.text}',
       'desc_text': '${controller.descTextEditingController.text}',
-      'time': Timestamp.now()
+      'time': Timestamp.now(),
     });
   }
 }

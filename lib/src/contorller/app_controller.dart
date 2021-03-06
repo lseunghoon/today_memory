@@ -20,6 +20,10 @@ class AppController extends GetxService {
     'assets/images/9.png',
   ].obs;
 
+  indexNum(index) {
+    return imgUrl[index];
+  }
+
   final oneTextEditingController =
       TextEditingController(); //컨트롤러 만들어서 텍스트 필드 값 컨트롤.
   final descTextEditingController = TextEditingController();

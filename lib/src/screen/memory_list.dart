@@ -20,27 +20,32 @@ class MemoryListPage extends GetView<AppController> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.back();
+              Get.offAllNamed('/');
             }),
         backgroundColor: Colors.grey[50],
       ),
       body: SafeArea(
         child: StreamBuilder(
-          stream: f.collection('data').snapshots(),
+          stream: f
+              .collection('data')
+              .orderBy('time', descending: true) //시간 순 정렬.
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             final items = snapshot.data.docs;
-            if (snapshot.data == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+            if (items == null) {
+              print('nnnnn');
+              return Text('Loading . . . ');
             } else {
+              print('yyyyy');
               return ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     final item = items[index];
                     return ListTile(
-                      title: Text(item['one_sentence']),
+                      title: Text(
+                        item['one_sentence'],
+                      ),
                       subtitle: Text(
                         dateFormat.format(
                           DateTime.parse(item['time'].toDate().toString()),
@@ -51,10 +56,10 @@ class MemoryListPage extends GetView<AppController> {
                         onPressed: () {
                           final docId = snapshot.data.docs[index]
                               .id; //삭제 하는부분, doc id 뽑느라 하루종일 씀.
-                          print(docId);
                           f.collection('data').doc(docId).delete();
                         },
                       ),
+                      // leading: ,
                     );
                   });
             }
