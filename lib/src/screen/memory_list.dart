@@ -36,15 +36,12 @@ class MemoryListPage extends GetView<AppController> {
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            final items = snapshot.data.docs;
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              print(items);
-              return Text('Loading . . . ');
-            } else if (!snapshot.hasData) {
+            if (!snapshot.hasData) {
               print('nynynynyny');
               return CircularProgressIndicator();
             } else {
               print('yyyyy');
+              final items = snapshot.data.docs;
               return ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
