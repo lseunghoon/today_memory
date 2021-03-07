@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 import 'package:todays_memory/src/screen/add_memory.dart';
+import 'package:todays_memory/src/screen/detail_page.dart';
 import 'package:todays_memory/src/screen/home_page.dart';
 import 'package:todays_memory/src/screen/memory_list.dart';
 
@@ -42,6 +43,12 @@ class MyApp extends StatelessWidget {
           transition: Transition.leftToRightWithFade,
           transitionDuration: Duration(milliseconds: 500),
         ),
+        GetPage(
+          name: '/detail',
+          page: () => DetailPage(),
+          transition: Transition.leftToRightWithFade,
+          transitionDuration: Duration(milliseconds: 500),
+        )
       ],
     );
   }

@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 import 'package:todays_memory/src/screen/add_memory.dart';
+import 'package:todays_memory/src/widget/getimage.dart';
 
 final storage = FirebaseStorage.instance;
 
 class MemoryListPage extends GetView<AppController> {
   final f = FirebaseFirestore.instance;
   DateFormat dateFormat = DateFormat('yyyy년 MM월 dd일');
+  final imgIndex = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,9 @@ class MemoryListPage extends GetView<AppController> {
                   itemBuilder: (context, index) {
                     final item = items[index];
                     return ListTile(
+                      onTap: () {
+                        Get.toNamed('/detail', arguments: item);
+                      },
                       title: Text(
                         item['one_sentence'],
                       ),
@@ -63,8 +68,7 @@ class MemoryListPage extends GetView<AppController> {
                         },
                       ),
                       leading: FutureBuilder(
-                          future:
-                              _getImage(context, '${item['index'] + 1}.png'),
+                          future: getImage(context, '${item['index'] + 1}.png'),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.done) {
@@ -94,24 +98,5 @@ class MemoryListPage extends GetView<AppController> {
         ),
       ),
     );
-  }
-
-  Future<Widget> _getImage(BuildContext context, String imageName) async {
-    Image image;
-    await FireStorageService.loadImage(context, imageName).then((value) {
-      image = Image.network(
-        value.toString(),
-        fit: BoxFit.scaleDown,
-      );
-    });
-    return image;
-  }
-}
-
-class FireStorageService extends GetxController {
-  FireStorageService();
-
-  static Future<dynamic> loadImage(BuildContext context, String image) async {
-    return await storage.ref().child(image).getDownloadURL();
   }
 }
