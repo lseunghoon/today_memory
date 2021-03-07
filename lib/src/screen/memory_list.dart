@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
-import 'package:todays_memory/src/screen/add_memory.dart';
 import 'package:todays_memory/src/widget/getimage.dart';
 
 final storage = FirebaseStorage.instance;
@@ -39,7 +38,7 @@ class MemoryListPage extends GetView<AppController> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             final items = snapshot.data.docs;
             if (items == null) {
-              print('nnnnn');
+              print(items);
               return Text('Loading . . . ');
             } else {
               print('yyyyy');
@@ -67,30 +66,34 @@ class MemoryListPage extends GetView<AppController> {
                           f.collection('data').doc(docId).delete();
                         },
                       ),
-                      leading: FutureBuilder(
-                          future: getImage(context, '${item['index'] + 1}.png'),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    child: snapshot.data,
-                                  ),
-                                ],
-                              );
-                            }
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return Container(
-                                width: 20,
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                            return Container();
-                          }),
+                      leading: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: FutureBuilder(
+                            future:
+                                getImage(context, '${item['index'] + 1}.png'),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 20,
+                                      child: snapshot.data,
+                                    ),
+                                  ],
+                                );
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Container(
+                                  width: 20,
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              return Container();
+                            }),
+                      ),
                     );
                   });
             }

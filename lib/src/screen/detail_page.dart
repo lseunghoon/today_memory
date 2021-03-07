@@ -57,6 +57,7 @@ class DetailPage extends GetView<AppController> {
                         DateTime.parse(item['time'].toDate().toString()),
                       ),
                       style: TextStyle(color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(
                       height: 5,
@@ -66,37 +67,30 @@ class DetailPage extends GetView<AppController> {
                         DateTime.parse(item['time'].toDate().toString()),
                       ),
                       style: TextStyle(color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
-                    TextField(
-                      controller: controller.oneTextEditingController,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        border: InputBorder.none,
-                        hintText: '오늘의 기억 한줄 요약',
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                      ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      item['one_sentence'],
+                      style: TextStyle(fontSize: 17),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(17.0),
                       child: Container(
                         height: 1,
                         color: Colors.black45,
                       ),
                     ),
                     Expanded(
-                      child: SingleChildScrollView(
-                        child: TextField(
-                          controller: controller.descTextEditingController,
-                          maxLines: 99,
-                          decoration: InputDecoration(
-                            isDense: true,
-                            border: InputBorder.none,
-                            hintText: '오늘의 기억을 남겨보세요',
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: SingleChildScrollView(
+                          child: Text(
+                            item['desc_text'],
+                            style: TextStyle(fontSize: 15),
+                            textAlign: TextAlign.start,
                           ),
                         ),
                       ),
