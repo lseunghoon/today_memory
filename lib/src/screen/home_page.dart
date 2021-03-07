@@ -9,6 +9,7 @@ class HomePage extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
@@ -25,12 +26,13 @@ class HomePage extends GetView<AppController> {
           },
         ),
         actions: [
-          IconButton(
-              icon: Icon(
-                Icons.add,
-                color: Colors.black,
-              ),
-              onPressed: () {}),
+          //TODO : 카테고리 추가 기능?
+          // IconButton(
+          //     icon: Icon(
+          //       Icons.add,
+          //       color: Colors.black,
+          //     ),
+          //     onPressed: () {}),
         ],
       ),
       body: Column(
