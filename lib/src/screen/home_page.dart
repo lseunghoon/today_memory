@@ -1,8 +1,11 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 
 class HomePage extends GetView<AppController> {
+  final storage = FirebaseStorage.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 import 'package:todays_memory/src/screen/add_memory.dart';
+
+final storage = FirebaseStorage.instance;
 
 class MemoryListPage extends GetView<AppController> {
   final f = FirebaseFirestore.instance;
@@ -59,7 +62,31 @@ class MemoryListPage extends GetView<AppController> {
                           f.collection('data').doc(docId).delete();
                         },
                       ),
-                      // leading: ,
+                      leading: FutureBuilder(
+                          future:
+                              _getImage(context, '${item['index'] + 1}.png'),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 20,
+                                    child: snapshot.data,
+                                  ),
+                                ],
+                              );
+                            }
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Container(
+                                width: 20,
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return Container();
+                          }),
                     );
                   });
             }
@@ -67,5 +94,24 @@ class MemoryListPage extends GetView<AppController> {
         ),
       ),
     );
+  }
+
+  Future<Widget> _getImage(BuildContext context, String imageName) async {
+    Image image;
+    await FireStorageService.loadImage(context, imageName).then((value) {
+      image = Image.network(
+        value.toString(),
+        fit: BoxFit.scaleDown,
+      );
+    });
+    return image;
+  }
+}
+
+class FireStorageService extends GetxController {
+  FireStorageService();
+
+  static Future<dynamic> loadImage(BuildContext context, String image) async {
+    return await storage.ref().child(image).getDownloadURL();
   }
 }

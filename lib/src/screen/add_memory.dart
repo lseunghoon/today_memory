@@ -59,7 +59,7 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
                       Get.snackbar('잠시만요 저기요', '오늘의 한줄을 써주세요!');
                     } else {
                       addText();
-                      Get.toNamed('/list', arguments: imgIndex);
+                      Get.offAndToNamed('/list', arguments: imgIndex);
                     }
                   },
                 ),
@@ -135,6 +135,7 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
       'one_sentence': '${controller.oneTextEditingController.text}',
       'desc_text': '${controller.descTextEditingController.text}',
       'time': Timestamp.now(),
+      'index': imgIndex
     });
   }
 }
