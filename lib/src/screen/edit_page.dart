@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:todays_memory/main.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 
-class DetailPage extends GetView<AppController> {
+class EditPage extends GetView<AppController> {
   DateFormat dateFormat = DateFormat('yyyy년 MM월 dd일');
   DateFormat dayFormat = DateFormat('E');
   final f = FirebaseFirestore.instance;
@@ -34,9 +34,7 @@ class DetailPage extends GetView<AppController> {
                   Icons.edit_rounded,
                   color: Colors.black,
                 ),
-                onPressed: () {
-                  Get.toNamed('/edit', arguments: item);
-                })
+                onPressed: () {})
           ],
         ),
         body: SafeArea(
@@ -74,25 +72,36 @@ class DetailPage extends GetView<AppController> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      item['one_sentence'],
-                      style: TextStyle(fontSize: 17),
+                    TextField(
+                      controller: controller.oneTextEditingController,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        border: InputBorder.none,
+                        hintText: '오늘의 기억 한줄 요약',
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(17.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 1,
                         color: Colors.black45,
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: SingleChildScrollView(
-                          child: Text(
-                            item['desc_text'],
-                            style: TextStyle(fontSize: 15),
-                            textAlign: TextAlign.start,
+                      child: SingleChildScrollView(
+                        child: TextField(
+                          controller: controller.descTextEditingController,
+                          maxLines: 99,
+                          decoration: InputDecoration(
+                            isDense: true,
+                            border: InputBorder.none,
+                            hintText: '오늘의 기억을 남겨보세요',
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),

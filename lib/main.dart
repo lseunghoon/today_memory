@@ -7,6 +7,8 @@ import 'package:todays_memory/src/screen/detail_page.dart';
 import 'package:todays_memory/src/screen/home_page.dart';
 import 'package:todays_memory/src/screen/memory_list.dart';
 
+import 'src/screen/edit_page.dart';
+
 AppController controller = AppController();
 
 void main() async {
@@ -46,6 +48,12 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/detail',
           page: () => DetailPage(),
+          transition: Transition.leftToRightWithFade,
+          transitionDuration: Duration(milliseconds: 500),
+        ),
+        GetPage(
+          name: '/edit',
+          page: () => EditPage(),
           transition: Transition.leftToRightWithFade,
           transitionDuration: Duration(milliseconds: 500),
         )
