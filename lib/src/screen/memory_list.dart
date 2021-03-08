@@ -37,65 +37,78 @@ class MemoryListPage extends GetView<AppController> {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
-              print('nynynynyny');
+              print('nnnnn');
               return CircularProgressIndicator();
             } else {
               print('yyyyy');
               final items = snapshot.data.docs;
-              return ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    final item = items[index];
-                    return ListTile(
-                      onTap: () {
-                        Get.toNamed('/detail', arguments: item);
-                      },
-                      title: Text(
-                        item['one_sentence'],
-                      ),
-                      subtitle: Text(
-                        dateFormat.format(
-                          DateTime.parse(item['time'].toDate().toString()),
+              print(items.length);
+              return items.length == 0
+                  ? Center(
+                      child: Text(
+                        '',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 19,
                         ),
                       ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.close),
-                        onPressed: () {
-                          final docId = snapshot.data.docs[index]
-                              .id; //삭제 하는부분, doc id 뽑느라 하루종일 씀.
-                          f.collection('data').doc(docId).delete();
-                        },
-                      ),
-                      leading: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: FutureBuilder(
-                            future:
-                                getImage(context, '${item['index'] + 1}.png'),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
+                    )
+                  : ListView.builder(
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final item = items[index];
+                        return ListTile(
+                          onTap: () {
+                            Get.toNamed('/detail', arguments: item);
+                          },
+                          title: Text(
+                            item['one_sentence'],
+                          ),
+                          subtitle: Text(
+                            dateFormat.format(
+                              DateTime.parse(item['time'].toDate().toString()),
+                            ),
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.close),
+                            onPressed: () {
+                              final docId = snapshot.data.docs[index]
+                                  .id; //삭제 하는부분, doc id 뽑느라 하루종일 씀.
+                              f.collection('data').doc(docId).delete();
+                            },
+                          ),
+                          //firebase Storage 이미지 가져오기
+                          leading: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: FutureBuilder(
+                                future: getImage(
+                                    context, '${item['index'] + 1}.png'),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 20,
+                                          child: snapshot.data,
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Container(
                                       width: 20,
-                                      child: snapshot.data,
-                                    ),
-                                  ],
-                                );
-                              }
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Container(
-                                  width: 20,
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                              return Container();
-                            }),
-                      ),
-                    );
-                  });
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                  return Container();
+                                }),
+                          ),
+                        );
+                      });
             }
           },
         ),
