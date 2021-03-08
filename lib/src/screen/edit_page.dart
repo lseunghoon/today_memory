@@ -16,6 +16,11 @@ class EditPage extends GetView<AppController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Edit',
+            style: TextStyle(color: Colors.black),
+          ),
           backgroundColor: Colors.grey[50],
           elevation: 0,
           leading: IconButton(
@@ -46,7 +51,8 @@ class EditPage extends GetView<AppController> {
                     if (controller.oneTextEditingController.text == '') {
                       Get.snackbar('잠시만요 저기요', '오늘의 한줄을 써주세요!');
                     } else {
-                      print('hello');
+                      setText();
+                      Get.offAndToNamed('/list');
                     }
                   },
                 ),
@@ -131,5 +137,13 @@ class EditPage extends GetView<AppController> {
             ),
           ),
         ));
+  }
+
+  //수정하는 기능, id 빼내기 힘듬..
+  setText() {
+    f.collection('data').doc(item.id).update({
+      'one_sentence': '${controller.oneTextEditingController.text}',
+      'desc_text': '${controller.descTextEditingController.text}',
+    });
   }
 }
