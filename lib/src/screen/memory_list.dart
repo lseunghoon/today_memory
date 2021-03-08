@@ -46,7 +46,7 @@ class MemoryListPage extends GetView<AppController> {
               return items.length == 0
                   ? Center(
                       child: Text(
-                        '',
+                        '오늘의 기억을 남겨보세요.',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 19,
