@@ -24,18 +24,35 @@ class EditPage extends GetView<AppController> {
               color: Colors.black,
             ),
             onPressed: () {
-              print(item);
               Get.back();
             },
           ),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.edit_rounded,
-                  color: Colors.black,
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            padding: EdgeInsets.only(
+                //키보드 올라오면 바텀앱바 위로
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.image),
+                  onPressed: () {},
                 ),
-                onPressed: () {})
-          ],
+                IconButton(
+                  icon: Icon(Icons.check),
+                  onPressed: () {
+                    if (controller.oneTextEditingController.text == '') {
+                      Get.snackbar('잠시만요 저기요', '오늘의 한줄을 써주세요!');
+                    } else {
+                      print('hello');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
         body: SafeArea(
           child: Padding(
@@ -72,8 +89,9 @@ class EditPage extends GetView<AppController> {
                     SizedBox(
                       height: 20,
                     ),
-                    TextField(
-                      controller: controller.oneTextEditingController,
+                    TextFormField(
+                      controller: controller.oneTextEditingController
+                        ..text = '${item['one_sentence']}',
                       decoration: InputDecoration(
                         isDense: true,
                         border: InputBorder.none,
@@ -92,8 +110,9 @@ class EditPage extends GetView<AppController> {
                     ),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: TextField(
-                          controller: controller.descTextEditingController,
+                        child: TextFormField(
+                          controller: controller.descTextEditingController
+                            ..text = '${item['desc_text']}',
                           maxLines: 99,
                           decoration: InputDecoration(
                             isDense: true,
