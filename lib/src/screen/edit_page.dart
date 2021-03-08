@@ -18,7 +18,7 @@ class EditPage extends GetView<AppController> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'Edit',
+            '수정',
             style: TextStyle(color: Colors.black),
           ),
           backgroundColor: Colors.grey[50],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 import 'package:intl/intl.dart';
-import 'dart:io';
 
 import 'package:todays_memory/src/screen/memory_list.dart';
 
