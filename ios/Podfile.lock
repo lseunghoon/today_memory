@@ -300,12 +300,15 @@ PODS:
   - nanopb/decode (2.30906.0)
   - nanopb/encode (2.30906.0)
   - PromisesObjC (1.2.12)
+  - share (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
+  - share (from `.symlinks/plugins/share/ios`)
 
 SPEC REPOS:
   trunk:
@@ -334,6 +337,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
+  share:
+    :path: ".symlinks/plugins/share/ios"
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -355,6 +360,7 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
 
 PODFILE CHECKSUM: 4e8f8b2be68aeea4c0d5beb6ff1e79fface1d048
 

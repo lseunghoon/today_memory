@@ -44,7 +44,6 @@ class MemoryListPage extends GetView<AppController> {
               } else {
                 print('yyyyy');
                 final items = snapshot.data.docs;
-                print(items.length);
                 return items.length == 0
                     ? Center(
                         child: Text(

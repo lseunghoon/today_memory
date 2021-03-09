@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todays_memory/main.dart';
+import 'package:share/share.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 
 class DetailPage extends GetView<AppController> {
@@ -24,11 +24,18 @@ class DetailPage extends GetView<AppController> {
               color: Colors.black,
             ),
             onPressed: () {
-              print(item);
               Get.back();
             },
           ),
           actions: [
+            IconButton(
+                icon: Icon(
+                  Icons.share_rounded,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  share(context, item);
+                }),
             IconButton(
                 icon: Icon(
                   Icons.edit_rounded,
@@ -103,5 +110,11 @@ class DetailPage extends GetView<AppController> {
             ),
           ),
         ));
+  }
+
+  share(BuildContext context, item) {
+    final String desc = '${item['desc_text']}';
+
+    Share.share(desc);
   }
 }
