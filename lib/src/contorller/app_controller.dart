@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppController extends GetxService {
+  final DeviceInfoPlugin plugin = DeviceInfoPlugin();
   final f = FirebaseFirestore.instance;
 
   static AppController get to => Get.find();
@@ -33,5 +37,21 @@ class AppController extends GetxService {
     oneTextEditingController.dispose();
     descTextEditingController.dispose();
     super.onClose();
+  }
+
+  Future<void> initPlatform() async {
+    if (Platform.isAndroid) {
+      getAndroidDevice(await plugin.androidInfo);
+    }
+  }
+
+  getAndroidDevice(AndroidDeviceInfo device) {
+    return device.androidId;
+  }
+
+  @override
+  void onInit() {
+    initPlatform();
+    super.onInit();
   }
 }
