@@ -41,12 +41,12 @@ class EditPage extends GetView<AppController> {
                   //키보드 올라오면 바텀앱바 위로
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.image),
-                    onPressed: () {},
-                  ),
+                  // IconButton(
+                  //   icon: Icon(Icons.image),
+                  //   onPressed: () {},
+                  // ),
                   IconButton(
                     icon: Icon(Icons.check),
                     onPressed: () {
