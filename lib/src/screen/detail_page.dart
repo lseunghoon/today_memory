@@ -14,102 +14,106 @@ class DetailPage extends GetView<AppController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey[50],
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_outlined,
-              color: Colors.black,
+    return WillPopScope(
+      onWillPop: () {},
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.grey[50],
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios_outlined,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Get.back();
+              },
             ),
-            onPressed: () {
-              Get.back();
-            },
+            actions: [
+              IconButton(
+                  icon: Icon(
+                    Icons.share_rounded,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    share(context, item);
+                  }),
+              IconButton(
+                  icon: Icon(
+                    Icons.edit_rounded,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Get.toNamed('/edit', arguments: item);
+                  })
+            ],
           ),
-          actions: [
-            IconButton(
-                icon: Icon(
-                  Icons.share_rounded,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  share(context, item);
-                }),
-            IconButton(
-                icon: Icon(
-                  Icons.edit_rounded,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Get.toNamed('/edit', arguments: item);
-                })
-          ],
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: StreamBuilder(
-              stream: f.collection('data').snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                return Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/${item['index'] + 1}.png',
-                      width: 50,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      dateFormat.format(
-                        DateTime.parse(item['time'].toDate().toString()),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: StreamBuilder(
+                stream: f.collection('data').snapshots(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  return Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/${item['index'] + 1}.png',
+                        width: 50,
                       ),
-                      style: TextStyle(color: Colors.black),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      dayFormat.format(
-                        DateTime.parse(item['time'].toDate().toString()),
+                      SizedBox(
+                        height: 10,
                       ),
-                      style: TextStyle(color: Colors.black),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      item['one_sentence'],
-                      style: TextStyle(fontSize: 17),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(17.0),
-                      child: Container(
-                        height: 1,
-                        color: Colors.black45,
+                      Text(
+                        dateFormat.format(
+                          DateTime.parse(item['time'].toDate().toString()),
+                        ),
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: SingleChildScrollView(
-                          child: Text(
-                            item['desc_text'],
-                            style: TextStyle(fontSize: 15),
-                            textAlign: TextAlign.start,
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        dayFormat.format(
+                          DateTime.parse(item['time'].toDate().toString()),
+                        ),
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        item['one_sentence'],
+                        style: TextStyle(fontSize: 17),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(17.0),
+                        child: Container(
+                          height: 1,
+                          color: Colors.black45,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: SingleChildScrollView(
+                            child: Text(
+                              item['desc_text'],
+                              style: TextStyle(fontSize: 15),
+                              textAlign: TextAlign.start,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 
   share(BuildContext context, item) {
