@@ -10,6 +10,7 @@ class AppController extends GetxService {
   final f = FirebaseFirestore.instance;
 
   static AppController get to => Get.find();
+  RxString deviceId = 'qwer'.obs;
   RxList<String> category =
       ['영화', '독서', '여행', '육아', '운동', '음식', '데이트', '쇼핑', '업무'].obs;
   RxList<String> imgUrl = [
@@ -41,7 +42,8 @@ class AppController extends GetxService {
 
   Future<void> initPlatform() async {
     if (Platform.isAndroid) {
-      getAndroidDevice(await plugin.androidInfo);
+      String data = getAndroidDevice(await plugin.androidInfo);
+      deviceId(data);
     }
   }
 

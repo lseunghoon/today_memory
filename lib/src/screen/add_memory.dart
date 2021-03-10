@@ -24,6 +24,12 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
   final f = FirebaseFirestore.instance;
 
   @override
+  void initState() {
+    controller.initPlatform();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {},
@@ -133,7 +139,7 @@ class _AddMemoryPageState extends State<AddMemoryPage> {
   }
 
   addText() {
-    f.collection('data').add({
+    f.collection(controller.deviceId.value).add({
       'one_sentence': '${controller.oneTextEditingController.text}',
       'desc_text': '${controller.descTextEditingController.text}',
       'time': Timestamp.now(),

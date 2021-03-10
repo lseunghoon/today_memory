@@ -145,7 +145,7 @@ class EditPage extends GetView<AppController> {
 
   //수정하는 기능, id 빼내기 힘듬..
   setText() {
-    f.collection('data').doc(item.id).update({
+    f.collection(controller.deviceId.value).doc(item.id).update({
       'one_sentence': '${controller.oneTextEditingController.text}',
       'desc_text': '${controller.descTextEditingController.text}',
     });

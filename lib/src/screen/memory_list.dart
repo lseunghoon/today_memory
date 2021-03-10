@@ -33,7 +33,7 @@ class MemoryListPage extends GetView<AppController> {
         body: SafeArea(
           child: StreamBuilder(
             stream: f
-                .collection('data')
+                .collection(controller.deviceId.value)
                 .orderBy('time', descending: true) //시간 순 정렬.
                 .snapshots(),
             builder:
@@ -76,7 +76,10 @@ class MemoryListPage extends GetView<AppController> {
                               onPressed: () {
                                 final docId = snapshot.data.docs[index]
                                     .id; //삭제 하는부분, doc id 뽑느라 하루종일 씀.
-                                f.collection('data').doc(docId).delete();
+                                f
+                                    .collection(controller.deviceId.value)
+                                    .doc(docId)
+                                    .delete();
                               },
                             ),
                             //firebase Storage 이미지 가져오기

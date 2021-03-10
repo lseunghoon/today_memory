@@ -25,15 +25,6 @@ class HomePage extends GetView<AppController> {
             Get.toNamed('/list');
           },
         ),
-        actions: [
-          //TODO : 카테고리 추가 기능?
-          // IconButton(
-          //     icon: Icon(
-          //       Icons.add,
-          //       color: Colors.black,
-          //     ),
-          //     onPressed: () {}),
-        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
