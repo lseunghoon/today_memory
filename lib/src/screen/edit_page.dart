@@ -5,12 +5,27 @@ import 'package:intl/intl.dart';
 import 'package:todays_memory/main.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 
-class EditPage extends GetView<AppController> {
+class EditPage extends StatefulWidget {
+  @override
+  _EditPageState createState() => _EditPageState();
+}
+
+class _EditPageState extends State<EditPage> {
+  AppController controller = AppController();
+
   DateFormat dateFormat = DateFormat('yyyy년 MM월 dd일');
+
   DateFormat dayFormat = DateFormat('E');
+
   final f = FirebaseFirestore.instance;
 
   final item = Get.arguments;
+
+  @override
+  void initState() {
+    controller.initPlatform();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +58,18 @@ class EditPage extends GetView<AppController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // IconButton(
-                  //   icon: Icon(Icons.image),
-                  //   onPressed: () {},
-                  // ),
+                  IconButton(
+                    icon: Icon(Icons.image),
+                    onPressed: () {},
+                  ),
                   IconButton(
                     icon: Icon(Icons.check),
                     onPressed: () {
                       if (controller.oneTextEditingController.text == '') {
                         Get.snackbar('잠시만요 저기요', '오늘의 한줄을 써주세요!');
                       } else {
+                        controller.initPlatform();
+
                         setText();
                         Get.offAndToNamed('/list');
                       }
@@ -143,7 +160,6 @@ class EditPage extends GetView<AppController> {
     );
   }
 
-  //수정하는 기능, id 빼내기 힘듬..
   setText() {
     f.collection(controller.deviceId.value).doc(item.id).update({
       'one_sentence': '${controller.oneTextEditingController.text}',
