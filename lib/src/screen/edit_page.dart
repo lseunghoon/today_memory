@@ -59,10 +59,6 @@ class _EditPageState extends State<EditPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(Icons.image),
-                    onPressed: () {},
-                  ),
-                  IconButton(
                     icon: Icon(Icons.check),
                     onPressed: () {
                       if (controller.oneTextEditingController.text == '') {
