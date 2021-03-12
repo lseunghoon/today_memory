@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todays_memory/main.dart';
 import 'package:todays_memory/src/contorller/app_controller.dart';
 
 class EditPage extends StatefulWidget {
