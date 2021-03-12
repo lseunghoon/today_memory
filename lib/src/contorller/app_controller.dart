@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 class AppController extends GetxService {
   final DeviceInfoPlugin plugin = DeviceInfoPlugin();
   final f = FirebaseFirestore.instance;
-
   static AppController get to => Get.find();
   RxString deviceId = 'qwer'.obs;
   RxList<String> category =
