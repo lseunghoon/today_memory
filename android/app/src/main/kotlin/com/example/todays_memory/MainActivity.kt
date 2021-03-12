@@ -1,4 +1,4 @@
-package com.example.todays_memory
+package com.dmcompany.todays_memory
 
 import io.flutter.embedding.android.FlutterActivity
 
