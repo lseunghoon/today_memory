@@ -10,5 +10,5 @@
 ## 앱화면
 
 <p align="center">
-  <img src="이미지URL">
+  <img src="https://play.google.com/store/apps/details?id=com.dmcompany.todays_memory&hl=ko)">
 </p>
